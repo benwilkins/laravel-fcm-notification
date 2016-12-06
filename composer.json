@@ -1,0 +1,19 @@
+{
+  "name": "benwilkins/laravel-fcm-notification",
+  "description": "Laravel FCM (Firebase Cloud Messaging) Notification Channel",
+  "authors": [
+    {
+      "name": "Ben Wilkins",
+      "email": "bentwilkins@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Benwilkins\\FCM\\": "src/"
+    }
+  }
+}
