@@ -6,10 +6,10 @@ use GuzzleHttp\Client;
 use Illuminate\Notifications\Notification;
 
 /**
- * Class FcmChannel
+ * Class FCMChannel
  * @package Benwilkins\FCM
  */
-class FcmChannel
+class FCMChannel
 {
     /**
      * @const The API URL for Firebase
@@ -35,7 +35,7 @@ class FcmChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        /** @var FcmMessage $message */
+        /** @var FCMMessage $message */
         $message = $notification->toFCM($notifiable);
 
         if (is_null($message->getTo())) {

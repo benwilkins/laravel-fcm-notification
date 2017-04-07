@@ -6,10 +6,10 @@ use Illuminate\Notifications\ChannelManager;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class FcmNotificationServiceProvider
+ * Class FCMNotificationServiceProvider
  * @package Benwilkins\FCM
  */
-class FcmNotificationServiceProvider extends ServiceProvider
+class FCMNotificationServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -30,7 +30,7 @@ class FcmNotificationServiceProvider extends ServiceProvider
     {
         $app = $this->app;
         $this->app->make(ChannelManager::class)->extend('fcm', function() use ($app) {
-            return $app->make(FcmChannel::class);
+            return $app->make(FCMChannel::class);
         });
     }
 }
