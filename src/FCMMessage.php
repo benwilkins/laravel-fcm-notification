@@ -12,7 +12,7 @@ class FCMMessage
     const PRIORITY_HIGH = 'high';
 
     /**
-     * @var string
+     * @var string|array
      */
     private $to;
     /**
@@ -29,13 +29,13 @@ class FCMMessage
     private $priority = self::PRIORITY_NORMAL;
 
     /**
-     * @param string $recipient
+     * @param string|array $recipient
      * @param bool $recipientIsTopic
      * @return $this
      */
     public function to($recipient, $recipientIsTopic = false)
     {
-        if ($recipientIsTopic) {
+        if ($recipientIsTopic && is_string($recipient)) {
             $this->to = '/topics/' . $recipient;
         } else {
             $this->to = $recipient;
@@ -45,7 +45,7 @@ class FCMMessage
     }
 
     /**
-     * @return string|null
+     * @return string|array|null
      */
     public function getTo()
     {
@@ -91,11 +91,24 @@ class FCMMessage
      */
     public function formatData()
     {
-        return json_encode([
-            'data'         => $this->data,
-            'notification' => $this->notification,
-            'priority'     => $this->priority,
-            'to'           => $this->to
-        ]);
+        $payload = [
+            'priority' => $this->priority,
+        ];
+
+        if (is_array($this->to)) {
+            $payload['registration_ids'] = $this->to;
+        } else {
+            $payload['to'] = $this->to;
+        }
+
+        if (isset($this->data) && count($this->data)) {
+            $payload['data'] = $this->data;
+        }
+
+        if (isset($this->notification) && count($this->notification)) {
+            $payload['notification'] = $this->notification;
+        }
+
+        return \GuzzleHttp\json_encode($payload);
     }
 }
