@@ -60,6 +60,6 @@ class FCMChannel
      */
     private function getApiKey()
     {
-        return config('laravel-fcm-notification.api_key');
+        return config('services.fcm.key');
     }
 }

@@ -11,17 +11,6 @@ use Illuminate\Support\ServiceProvider;
  */
 class FCMNotificationServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->publishes([
-            __DIR__.'/config/laravel-fcm-notification.php' => config_path('laravel-fcm-notification.php'),
-        ]);
-    }
 
     /**
      * Register
