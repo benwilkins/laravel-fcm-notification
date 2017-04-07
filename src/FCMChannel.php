@@ -51,8 +51,9 @@ class FCMChannel
                 'Authorization' => 'key=' . $this->getApiKey(),
                 'Content-Type'  => 'application/json',
             ],
-            'body'    => $message->formatData(),
+            'body' => $message->formatData(),
         ]);
+
     }
 
     /**
