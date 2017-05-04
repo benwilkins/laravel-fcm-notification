@@ -3,10 +3,10 @@
 namespace Benwilkins\FCM;
 
 /**
- * Class FCMMessage
+ * Class FcmMessage
  * @package Benwilkins\FCM
  */
-class FCMMessage
+class FcmMessage
 {
     const PRIORITY_NORMAL = 'normal';
     const PRIORITY_HIGH = 'high';
