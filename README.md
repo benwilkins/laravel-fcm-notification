@@ -64,7 +64,7 @@ Add the method `public function toFcm($notifiable)` to your notification, and re
 ```php
 public function toFcm($notifiable) 
 {
-    $message = new Benwilkins\FcmMessage();
+    $message = new Benwilkins\FCM\FcmMessage();
     $message->content([
         'title'        => 'Foo', 
         'body'         => 'Bar', 
@@ -73,7 +73,7 @@ public function toFcm($notifiable)
         'click_action' => '' // Optional
     ])->data([
         'param1' => 'baz' // Optional
-    ])->priority(Benwilkins\FcmMessage::PRIORITY_HIGH); // Optional - Default is 'normal'.
+    ])->priority(Benwilkins\FCM\FcmMessage::PRIORITY_HIGH); // Optional - Default is 'normal'.
     
     return $message;
 }
@@ -98,7 +98,7 @@ When sending to a topic, you may define so within the `toFcm` method in the noti
 ```php
 public function toFcm($notifiable) 
 {
-    $message = new Benwilkins\FcmMessage();
+    $message = new Benwilkins\FCM\FcmMessage();
     $message->to('the-topic', $recipientIsTopic = true)
     ->content([...])
     ->data([...]);
