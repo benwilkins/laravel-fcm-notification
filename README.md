@@ -59,10 +59,10 @@ public function via($notifiable)
 }
 ```
 
-Add the method `public function toFcm($notifiable)` to your notification, and return an instance of `FcmMessage`: 
+Add the method `public function toFCM($notifiable)` to your notification, and return an instance of `FcmMessage`: 
 
 ```php
-public function toFcm($notifiable) 
+public function toFCM($notifiable) 
 {
     $message = new Benwilkins\FCM\FcmMessage();
     $message->content([
@@ -93,10 +93,10 @@ public function routeNotificationForFcm()
 }
 ```
 
-When sending to a topic, you may define so within the `toFcm` method in the notification:
+When sending to a topic, you may define so within the `toFCM` method in the notification:
 
 ```php
-public function toFcm($notifiable) 
+public function toFCM($notifiable) 
 {
     $message = new Benwilkins\FCM\FcmMessage();
     $message->to('the-topic', $recipientIsTopic = true)
