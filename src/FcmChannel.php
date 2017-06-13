@@ -51,8 +51,9 @@ class FcmChannel
                 'Authorization' => 'key=' . $this->getApiKey(),
                 'Content-Type'  => 'application/json',
             ],
-            'body'    => $message->formatData(),
+            'body' => $message->formatData(),
         ]);
+
     }
 
     /**
@@ -60,6 +61,6 @@ class FcmChannel
      */
     private function getApiKey()
     {
-        return config('laravel-fcm-notification.api_key');
+        return config('services.fcm.key');
     }
 }
