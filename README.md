@@ -11,7 +11,7 @@ Use this package to send push notifications via Laravel to Firebase Cloud Messag
 This package can be installed through Composer.
 
 ``` bash
-composer require benwilkins/laravel-fcm-notification:@dev-master
+composer require benwilkins/laravel-fcm-notification
 ```
 
 Once installed, add the service provider:
@@ -25,21 +25,12 @@ Once installed, add the service provider:
 ];
 ```
 
-Publish the config file:
+Add your firebase API key to `config/services.php`:
 
-``` bash
-php artisan vendor:publish --provider="Benwilkins\FCM\FcmNotificationServiceProvider"
-```
-
-The following config file will be published in `config/laravel-fcm-notification.php`. Add your Firebase API Key here.
-
-```php
-return [
-    /*
-     * Add the Firebase API key
-     */
-    'api_key' => ''
-];
+``` php
+'fcm' => [
+    'key' => 'your-firebase-api-key'
+]
 ```
 
 ## Example Usage
