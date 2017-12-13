@@ -25,21 +25,13 @@ Once installed, add the service provider:
 ];
 ```
 
-Publish the config file:
-
-``` bash
-php artisan vendor:publish --provider="Benwilkins\FCM\FcmNotificationServiceProvider"
-```
-
-The following config file will be published in `config/laravel-fcm-notification.php`. Add your Firebase API Key here.
+Add the following config to `config/services.php`. Add your Firebase Cloud Messaging API Key here.
 
 ```php
-return [
-    /*
-     * Add the Firebase API key
-     */
-    'api_key' => ''
-];
+
+    'fcm' => [
+        'key' => 'cloud-messaging-key'
+    ],
 ```
 
 ## Example Usage
@@ -102,6 +94,21 @@ public function toFcm($notifiable)
     $message->to('the-topic', $recipientIsTopic = true)
     ->content([...])
     ->data([...]);
+    
+    return $message;
+}
+```
+
+Or when sending with a condition:
+
+```php
+public function toFcm($notifiable) 
+{
+    $message = new Benwilkins\FCM\FcmMessage();
+    $message->contentAvailable(true)
+        ->priority('high')
+        ->condition("'user_".$notifiable->id."' in topics")
+        ->data([...]);
     
     return $message;
 }
