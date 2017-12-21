@@ -38,7 +38,7 @@ class FcmChannel
         /** @var FcmMessage $message */
         $message = $notification->toFcm($notifiable);
 
-        if (is_null($message->getTo())) {
+        if (is_null($message->getCondition()) && is_null($message->getTo())) {
             if (!$to = $notifiable->routeNotificationFor('fcm')) {
                 return;
             }

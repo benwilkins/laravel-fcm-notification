@@ -1,8 +1,8 @@
 # laravel-fcm-notification
 Laravel FCM (Firebase Cloud Messaging) Notification Channel
 
-[![Latest Version](https://img.shields.io/github/release/benwilkins/laravel-analyst.svg?style=flat-square)](https://github.com/benwilkins/laravel-analyst/releases)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Latest Version](https://img.shields.io/github/release/benwilkins/laravel-fcm-notification.svg?style=flat-square)](https://github.com/benwilkins/laravel-fcm-notification/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 Use this package to send push notifications via Laravel to Firebase Cloud Messaging. Laravel 5.3+ required.
 
@@ -11,7 +11,7 @@ Use this package to send push notifications via Laravel to Firebase Cloud Messag
 This package can be installed through Composer.
 
 ``` bash
-composer require benwilkins/laravel-fcm-notification:@dev-master
+composer require benwilkins/laravel-fcm-notification
 ```
 
 Once installed, add the service provider:
@@ -25,21 +25,13 @@ Once installed, add the service provider:
 ];
 ```
 
-Publish the config file:
-
-``` bash
-php artisan vendor:publish --provider="Benwilkins\FCM\FcmNotificationServiceProvider"
-```
-
-The following config file will be published in `config/laravel-fcm-notification.php`. Add your Firebase API Key here.
+Add the following config to `config/services.php`. Add your Firebase Cloud Messaging API Key here.
 
 ```php
-return [
-    /*
-     * Add the Firebase API key
-     */
-    'api_key' => ''
-];
+
+    'fcm' => [
+        'key' => 'cloud-messaging-key'
+    ],
 ```
 
 ## Example Usage
@@ -107,6 +99,21 @@ public function toFcm($notifiable)
 }
 ```
 
+Or when sending with a condition:
+
+```php
+public function toFcm($notifiable) 
+{
+    $message = new Benwilkins\FCM\FcmMessage();
+    $message->contentAvailable(true)
+        ->priority('high')
+        ->condition("'user_".$notifiable->id."' in topics")
+        ->data([...]);
+    
+    return $message;
+}
+```
+
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
