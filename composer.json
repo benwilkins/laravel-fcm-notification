@@ -15,5 +15,12 @@
     "psr-4": {
       "Benwilkins\\FCM\\": "src/"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Benwilkins\\FCM\\FcmNotificationServiceProvider"
+      ]
+    }
   }
 }

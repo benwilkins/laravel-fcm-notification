@@ -14,7 +14,7 @@ This package can be installed through Composer.
 composer require benwilkins/laravel-fcm-notification:@dev-master
 ```
 
-Once installed, add the service provider:
+If installing on < Laravel 5.5 then add the service provider:
 
 ```php
 // config/app.php
