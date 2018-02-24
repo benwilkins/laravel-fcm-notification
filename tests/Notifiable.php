@@ -2,10 +2,10 @@
 
 namespace Benwilkins\FCM\Tests;
 
-
 class Notifiable
 {
     use \Illuminate\Notifications\Notifiable;
+
     /**
      * @return int
      */

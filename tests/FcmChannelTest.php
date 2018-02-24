@@ -2,20 +2,15 @@
 
 namespace Benwilkins\FCM\Tests;
 
-
-use Benwilkins\FCM\FcmChannel;
-use Benwilkins\FCM\FcmMessage;
+use Mockery as m;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use Illuminate\Container\Container;
+use Benwilkins\FCM\FcmChannel;
+use Benwilkins\FCM\FcmMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Notifications\Dispatcher;
-use \Mockery as m;
-use Underscore\Dispatch;
 
 class FcmChannelTest extends TestCase
 {
-
     /**
      * @var Client|\Mockery\MockInterface
      */
@@ -32,22 +27,19 @@ class FcmChannelTest extends TestCase
     /** @var Notifiable|\Mockery\MockInterface */
     protected $notifiable;
 
-
-
     public function setUp()
     {
         $this->events = m::mock(FcmChannel::class);
         $this->client = m::mock(Client::class);
-        $this->channel = new FcmChannel($this->client, "");
+        $this->channel = new FcmChannel($this->client, '');
         $this->notification = new TestNotification;
         $this->notifiable = m::mock(Notifiable::class);
-
     }
 
     /** @test */
     public function it_can_send_a_notification()
     {
-        $response = new Response(200, [], "{}");
+        $response = new Response(200, [], '{}');
 
         $this->notifiable->shouldReceive('routeNotificationFor')
             ->andReturnTrue();

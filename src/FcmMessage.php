@@ -3,8 +3,7 @@
 namespace Benwilkins\FCM;
 
 /**
- * Class FcmMessage
- * @package Benwilkins\FCM
+ * Class FcmMessage.
  */
 class FcmMessage
 {
@@ -39,12 +38,12 @@ class FcmMessage
     private $collapseKey;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $contentAvailable;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $mutableContent;
 
@@ -66,7 +65,7 @@ class FcmMessage
     public function to($recipient, $recipientIsTopic = false)
     {
         if ($recipientIsTopic && is_string($recipient)) {
-            $this->to = '/topics/' . $recipient;
+            $this->to = '/topics/'.$recipient;
         } else {
             $this->to = $recipient;
         }
@@ -155,7 +154,7 @@ class FcmMessage
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isContentAvailable()
     {
@@ -163,7 +162,7 @@ class FcmMessage
     }
 
     /**
-     * @param boolean $contentAvailable
+     * @param bool $contentAvailable
      * @return $this
      */
     public function contentAvailable($contentAvailable)
@@ -174,7 +173,7 @@ class FcmMessage
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isMutableContent()
     {
@@ -182,7 +181,7 @@ class FcmMessage
     }
 
     /**
-     * @param boolean $mutableContent
+     * @param bool $mutableContent
      * @return $this
      */
     public function mutableContent($mutableContent)
@@ -230,8 +229,6 @@ class FcmMessage
         return $this;
     }
 
-
-
     /**
      * @return string
      */
@@ -255,11 +252,11 @@ class FcmMessage
             $payload['notification'] = $this->notification;
         }
 
-        if (isset($this->condition) && !empty($this->condition)) {
+        if (isset($this->condition) && ! empty($this->condition)) {
             $payload['condition'] = $this->condition;
         }
 
-        if (isset($this->collapseKey) && !empty($this->collapseKey)) {
+        if (isset($this->collapseKey) && ! empty($this->collapseKey)) {
             $payload['collapse_key'] = $this->collapseKey;
         }
 
@@ -275,7 +272,7 @@ class FcmMessage
             $payload['time_to_live'] = $this->timeToTive;
         }
 
-        if (isset($this->packageName) && !empty($this->packageName)) {
+        if (isset($this->packageName) && ! empty($this->packageName)) {
             $payload['restricted_package_name'] = $this->packageName;
         }
 

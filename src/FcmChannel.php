@@ -6,8 +6,7 @@ use GuzzleHttp\Client;
 use Illuminate\Notifications\Notification;
 
 /**
- * Class FcmChannel
- * @package Benwilkins\FCM
+ * Class FcmChannel.
  */
 class FcmChannel
 {
@@ -45,7 +44,7 @@ class FcmChannel
         $message = $notification->toFcm($notifiable);
 
         if (is_null($message->getTo())) {
-            if (!$to = $notifiable->routeNotificationFor('fcm')) {
+            if (! $to = $notifiable->routeNotificationFor('fcm')) {
                 return;
             }
 
@@ -54,7 +53,7 @@ class FcmChannel
 
         $response = $this->client->post(self::API_URI, [
             'headers' => [
-                'Authorization' => 'key=' . $this->apikey,
+                'Authorization' => 'key='.$this->apikey,
                 'Content-Type'  => 'application/json',
             ],
             'body' => $message->formatData(),
