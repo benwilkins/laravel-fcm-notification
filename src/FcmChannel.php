@@ -22,11 +22,17 @@ class FcmChannel
     private $client;
 
     /**
+     * @var string
+     */
+    private $apikey;
+
+    /**
      * @param Client $client
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, $apiKey)
     {
         $this->client = $client;
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -48,20 +54,12 @@ class FcmChannel
 
         $response = $this->client->post(self::API_URI, [
             'headers' => [
-                'Authorization' => 'key=' . $this->getApiKey(),
+                'Authorization' => 'key=' . $this->apikey,
                 'Content-Type'  => 'application/json',
             ],
             'body' => $message->formatData(),
         ]);
 
         return \GuzzleHttp\json_decode($response->getBody(), true);
-    }
-
-    /**
-     * @return string
-     */
-    private function getApiKey()
-    {
-        return config('services.fcm.key');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Benwilkins\FCM;
 
+use GuzzleHttp\Client;
 use Illuminate\Notifications\ChannelManager;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,7 +20,7 @@ class FcmNotificationServiceProvider extends ServiceProvider
     {
         $app = $this->app;
         $this->app->make(ChannelManager::class)->extend('fcm', function() use ($app) {
-            return $app->make(FcmChannel::class);
+            return new FcmChannel(new Client(), config('services.fcm.key'));
         });
     }
 }
