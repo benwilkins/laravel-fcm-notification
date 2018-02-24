@@ -21,5 +21,4 @@ class FcmMessageTest extends TestCase
         $priority = json_decode($this->message->formatData(), true)['priority'];
         $this->assertEquals($priority, FcmMessage::PRIORITY_NORMAL);
     }
-
 }

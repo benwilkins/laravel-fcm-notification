@@ -2,7 +2,6 @@
 
 namespace Benwilkins\FCM\Tests;
 
-use function foo\func;
 use Mockery;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
@@ -18,8 +17,9 @@ abstract class TestCase extends BaseTestCase
     }
 }
 
-if (!function_exists('config')) {
-    function config($key = null) {
+if (! function_exists('config')) {
+    function config($key = null)
+    {
         return 1;
     }
 }
