@@ -46,7 +46,7 @@ class FcmChannel
             $message->to($to);
         }
 
-        $this->client->post(self::API_URI, [
+        $response = $this->client->post(self::API_URI, [
             'headers' => [
                 'Authorization' => 'key=' . $this->getApiKey(),
                 'Content-Type'  => 'application/json',
@@ -54,6 +54,7 @@ class FcmChannel
             'body' => $message->formatData(),
         ]);
 
+        return \GuzzleHttp\json_decode($response->getBody(), true);
     }
 
     /**
