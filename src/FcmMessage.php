@@ -240,7 +240,7 @@ class FcmMessage
 
         if (is_array($this->to)) {
             $payload['registration_ids'] = $this->to;
-        } else {
+        } elseif (!empty($this->to) ) {
             $payload['to'] = $this->to;
         }
 
