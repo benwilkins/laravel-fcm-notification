@@ -53,6 +53,11 @@ class FcmMessage
     private $timeToTive;
 
     /**
+     * @var bool
+     */
+    private $dryRun;
+
+    /**
      * @var string
      */
     private $packageName;
@@ -211,6 +216,25 @@ class FcmMessage
     }
 
     /**
+     * @return bool
+     */
+    public function isDryRun()
+    {
+        return $this->dryRun;
+    }
+
+    /**
+     * @param bool $dryRun
+     * @return $this
+     */
+    public function dryRun($dryRun)
+    {
+        $this->dryRun = $dryRun;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getPackageName()
@@ -270,6 +294,10 @@ class FcmMessage
 
         if (isset($this->timeToTive)) {
             $payload['time_to_live'] = $this->timeToTive;
+        }
+
+        if (isset($this->dryRun)) {
+            $payload['dry_run'] = $this->dryRun;
         }
 
         if (isset($this->packageName) && ! empty($this->packageName)) {
