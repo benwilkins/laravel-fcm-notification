@@ -1,10 +1,12 @@
 # laravel-fcm-notification
 Laravel FCM (Firebase Cloud Messaging) Notification Channel
 
-[![Latest Version](https://img.shields.io/github/release/benwilkins/laravel-analyst.svg?style=flat-square)](https://github.com/benwilkins/laravel-analyst/releases)
+[![Latest Version](https://img.shields.io/github/release/benwilkins/laravel-fcm-notification.svg?style=flat-square)](https://github.com/benwilkins/laravel-fcm-notification/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
 Use this package to send push notifications via Laravel to Firebase Cloud Messaging. Laravel 5.3+ required.
+
+This package works only with [Legacy HTTP Server Protocol](https://firebase.google.com/docs/cloud-messaging/http-server-ref)
 
 ## Install
 
@@ -105,6 +107,39 @@ public function toFcm($notifiable)
 }
 ```
 
+Or when sending with a condition:
+
+```php
+public function toFcm($notifiable) 
+{
+    $message = new Benwilkins\FCM\FcmMessage();
+    $message->contentAvailable(true)
+        ->priority('high')
+        ->condition("'user_".$notifiable->id."' in topics")
+        ->data([...]);
+    
+    return $message;
+}
+```
+
+## Interpreting a Response
+
+To proccess any laravel notification channel response check [Laravel Notification Events](https://laravel.com/docs/5.5/notifications#notification-events)
+
+This channel return a json array response: 
+```json
+ {
+    "multicast_id": "number",
+    "success": "number",
+    "failure": "number",
+    "canonical_ids": "number",
+    "results": "array",
+ }
+```
+
+Check [FCM Legacy HTTP Server Protocol](https://firebase.google.com/docs/cloud-messaging/http-server-ref#interpret-downstream) 
+for response interpreting documentation.
+
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
