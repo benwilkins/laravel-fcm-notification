@@ -27,18 +27,19 @@ Once installed, add the service provider:
 ];
 ```
 
-Publish the config file:
-
-``` bash
-php artisan vendor:publish --provider="Benwilkins\FCM\FcmNotificationServiceProvider"
-```
-
-Add the following config to `config/services.php`. Add your Firebase Cloud Messaging API Key here.
+Add your Firebase API Key in `config/services.php`.
 
 ```php
-'fcm' => [
-    'key' => 'cloud-messaging-key'
-],
+return [
+   
+    ...
+    ...
+    
+    /*
+     * Add the Firebase API key
+     */
+    'key' => ''
+];
 ```
 
 ## Example Usage
