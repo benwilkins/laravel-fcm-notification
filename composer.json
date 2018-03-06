@@ -31,6 +31,13 @@
       "Benwilkins\\FCM\\Tests\\": "tests"
     }
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Benwilkins\\FCM\\FcmNotificationServiceProvider"
+      ]
+    }
+  },
   "scripts": {
     "test": "vendor/bin/phpunit"
   },
