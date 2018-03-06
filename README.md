@@ -34,11 +34,12 @@ return [
    
     ...
     ...
-    
     /*
      * Add the Firebase API key
      */
-    'key' => ''
+    'firebase' => [
+        'key' => ''
+     ]
 ];
 ```
 
