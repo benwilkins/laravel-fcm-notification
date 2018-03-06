@@ -37,7 +37,7 @@ return [
     /*
      * Add the Firebase API key
      */
-    'firebase' => [
+    'fcm' => [
         'key' => ''
      ]
 ];
