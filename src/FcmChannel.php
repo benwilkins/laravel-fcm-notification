@@ -6,8 +6,7 @@ use GuzzleHttp\Client;
 use Illuminate\Notifications\Notification;
 
 /**
- * Class FcmChannel
- * @package Benwilkins\FCM
+ * Class FcmChannel.
  */
 class FcmChannel
 {
@@ -22,11 +21,17 @@ class FcmChannel
     private $client;
 
     /**
+     * @var string
+     */
+    private $apikey;
+
+    /**
      * @param Client $client
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, $apiKey)
     {
         $this->client = $client;
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -38,29 +43,22 @@ class FcmChannel
         /** @var FcmMessage $message */
         $message = $notification->toFcm($notifiable);
 
-        if (is_null($message->getTo())) {
-            if (!$to = $notifiable->routeNotificationFor('fcm')) {
+        if (is_null($message->getTo()) && is_null($message->getCondition())) {
+            if (! $to = $notifiable->routeNotificationFor('fcm')) {
                 return;
             }
 
             $message->to($to);
         }
 
-        $this->client->post(self::API_URI, [
+        $response = $this->client->post(self::API_URI, [
             'headers' => [
-                'Authorization' => 'key=' . $this->getApiKey(),
+                'Authorization' => 'key='.$this->apiKey,
                 'Content-Type'  => 'application/json',
             ],
             'body' => $message->formatData(),
         ]);
 
-    }
-
-    /**
-     * @return string
-     */
-    private function getApiKey()
-    {
-        return config('services.fcm.key');
+        return \GuzzleHttp\json_decode($response->getBody(), true);
     }
 }
