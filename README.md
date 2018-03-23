@@ -63,9 +63,13 @@ public function via($notifiable)
 Add the method `public function toFcm($notifiable)` to your notification, and return an instance of `FcmMessage`: 
 
 ```php
+use Benwilkins\FCM\FcmMessage;
+
+...
+
 public function toFcm($notifiable) 
 {
-    $message = new Benwilkins\FCM\FcmMessage();
+    $message = new FcmMessage();
     $message->content([
         'title'        => 'Foo', 
         'body'         => 'Bar', 
@@ -74,7 +78,7 @@ public function toFcm($notifiable)
         'click_action' => '' // Optional
     ])->data([
         'param1' => 'baz' // Optional
-    ])->priority(Benwilkins\FCM\FcmMessage::PRIORITY_HIGH); // Optional - Default is 'normal'.
+    ])->priority(FcmMessage::PRIORITY_HIGH); // Optional - Default is 'normal'.
     
     return $message;
 }
@@ -97,9 +101,13 @@ public function routeNotificationForFcm()
 When sending to a topic, you may define so within the `toFcm` method in the notification:
 
 ```php
+use Benwilkins\FCM\FcmMessage;
+
+...
+
 public function toFcm($notifiable) 
 {
-    $message = new Benwilkins\FCM\FcmMessage();
+    $message = new FcmMessage();
     $message->to('the-topic', $recipientIsTopic = true)
     ->content([...])
     ->data([...]);
@@ -111,9 +119,13 @@ public function toFcm($notifiable)
 Or when sending with a condition:
 
 ```php
+use Benwilkins\FCM\FcmMessage;
+
+...
+
 public function toFcm($notifiable) 
 {
-    $message = new Benwilkins\FCM\FcmMessage();
+    $message = new FcmMessage();
     $message->contentAvailable(true)
         ->priority('high')
         ->condition("'user_".$notifiable->id."' in topics")
