@@ -18,7 +18,7 @@ class FcmNotificationServiceProvider extends ServiceProvider
     {
         $app = $this->app;
         $this->app->make(ChannelManager::class)->extend('fcm', function () use ($app) {
-            return new FcmChannel(new Client(), config('services.fcm.key'));
+            return new FcmChannel(resolve(Client::class), config('services.fcm.key'));
         });
     }
 }
