@@ -13,7 +13,7 @@ This package works only with [Legacy HTTP Server Protocol](https://firebase.goog
 This package can be installed through Composer.
 
 ``` bash
-composer require benwilkins/laravel-fcm-notification:@dev-master
+composer require benwilkins/laravel-fcm-notification:dev-master
 ```
 
 If installing on < Laravel 5.5 then add the service provider:
