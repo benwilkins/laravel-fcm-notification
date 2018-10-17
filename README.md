@@ -90,9 +90,10 @@ When sending to specific device, make sure your notifiable entity has `routeNoti
 /**
  * Route notifications for the FCM channel.
  *
+ * @param  \Illuminate\Notifications\Notification  $notification
  * @return string
  */
-public function routeNotificationForFcm()
+public function routeNotificationForFcm($notification)
 {
     return $this->device_token;
 }
