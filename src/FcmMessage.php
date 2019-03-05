@@ -132,6 +132,30 @@ class FcmMessage
      * @param string $condition
      * @return $this
      */
+
+    public function orCondition($condition)
+    {
+        $this->condition = $this->condition . ' || ' . $condition;
+
+        return $this;
+    }
+
+    /**
+     * @param string $condition
+     * @return $this
+     */
+
+    public function andCondition($condition)
+    {
+        $this->condition = $this->condition . ' && ' . $condition;
+
+        return $this;
+    }
+    
+    /**
+     * @param string $condition
+     * @return $this
+     */
     public function condition($condition)
     {
         $this->condition = $condition;
@@ -264,7 +288,7 @@ class FcmMessage
 
         if (is_array($this->to)) {
             $payload['registration_ids'] = $this->to;
-        } elseif (!empty($this->to) ) {
+        } elseif (!empty($this->to)) {
             $payload['to'] = $this->to;
         }
 
