@@ -15,9 +15,8 @@ class FcmNotificationServiceProvider extends ServiceProvider
      * Register.
      */
     public function register()
-    {
-        $app = $this->app;
-        $this->app->make(ChannelManager::class)->extend('fcm', function () use ($app) {
+    {       
+        $this->app->make(ChannelManager::class)->extend('fcm', function () {
             return new FcmChannel(app(Client::class), config('services.fcm.key'));
         });
     }
