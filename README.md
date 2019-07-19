@@ -136,6 +136,32 @@ public function toFcm($notifiable)
 }
 ```
 
+You may provide optional headers or override the request headers using `setHeaders()`:
+
+```php
+use Benwilkins\FCM\FcmMessage;
+
+...
+
+public function toFcm($notifiable) 
+{
+    $message = new FcmMessage();
+    $message->setHeaders([
+        'project_id'    =>  "48542497347"   // FCM sender_id
+    ])->content([
+        'title'        => 'Foo', 
+        'body'         => 'Bar', 
+        'sound'        => '', // Optional 
+        'icon'         => '', // Optional
+        'click_action' => '' // Optional
+    ])->data([
+        'param1' => 'baz' // Optional
+    ])->priority(FcmMessage::PRIORITY_HIGH); // Optional - Default is 'normal'.
+    
+    return $message;
+}
+```
+
 ## Interpreting a Response
 
 To proccess any laravel notification channel response check [Laravel Notification Events](https://laravel.com/docs/5.5/notifications#notification-events)
