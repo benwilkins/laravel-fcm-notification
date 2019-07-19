@@ -63,6 +63,11 @@ class FcmMessage
     private $packageName;
 
     /**
+     * @var array
+     */
+    private $headers = [];
+
+    /**
      * @param string|array $recipient
      * @param bool $recipientIsTopic
      * @return $this
@@ -264,7 +269,7 @@ class FcmMessage
 
         if (is_array($this->to)) {
             $payload['registration_ids'] = $this->to;
-        } elseif (!empty($this->to) ) {
+        } elseif (!empty($this->to)) {
             $payload['to'] = $this->to;
         }
 
@@ -305,5 +310,24 @@ class FcmMessage
         }
 
         return \GuzzleHttp\json_encode($payload);
+    }
+
+    /**
+     * @param array $headers
+     * @return $this
+     */
+    public function setHeaders($headers = [])
+    {
+        $this->headers = $headers;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
     }
 }
