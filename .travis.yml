@@ -1,10 +1,10 @@
-
 language: php
 
 php:
   - 7.0
   - 7.1
   - 7.2
+  - 7.3
 
 env:
   matrix:
@@ -16,7 +16,7 @@ before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
 script:
-  - phpunit --coverage-text --coverage-clover=coverage.clover
+  - composer test -- --coverage-text --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar

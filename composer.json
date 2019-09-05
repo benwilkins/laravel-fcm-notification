@@ -2,20 +2,25 @@
   "name": "benwilkins/laravel-fcm-notification",
   "description": "Laravel FCM (Firebase Cloud Messaging) Notification Channel",
   "license": "MIT",
+  "keywords": [
+    "laravel",
+    "fcm",
+    "firebase",
+    "notifications"
+  ],
   "authors": [
     {
       "name": "Ben Wilkins",
       "email": "bentwilkins@gmail.com"
     }
   ],
-  "minimum-stability": "dev",
   "require": {
     "php": ">=5.6.4",
     "guzzlehttp/guzzle": "^6.2",
-    "illuminate/notifications": "5.3.*|5.4.*|5.5.*|5.5.*|5.6.*|5.7.*|5.8.*",
-    "illuminate/queue": "5.3.*|5.4.*|5.5.*|5.5.*|5.6.*|5.7.*|5.8.*",
-    "illuminate/support": "5.3.*|5.4.*|5.5.*|5.5.*|5.6.*|5.7.*|5.8.*",
-    "illuminate/config": "5.3.*|5.4.*|5.5.*|5.5.*|5.6.*|5.7.*|5.8.*"
+    "illuminate/notifications": "~5.3|^6.0",
+    "illuminate/queue": "~5.3|^6.0",
+    "illuminate/support": "~5.3|^6.0",
+    "illuminate/config": "~5.3|^6.0"
   },
   "require-dev": {
     "mockery/mockery": "~1.0",
@@ -42,6 +47,9 @@
     "test": "vendor/bin/phpunit"
   },
   "config": {
-    "sort-packages": true
-  }
+    "sort-packages": true,
+    "preferred-install": "dist"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
