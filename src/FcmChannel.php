@@ -50,17 +50,30 @@ class FcmChannel
 
             $message->to($to);
         }
+        
+        if (is_array($message->getTo())) {
+            $chunks = array_chunk($message->getTo(), 1000);
 
-        $response = $this->client->post(self::API_URI, [
-            'headers' => array_merge(
-                [
+            foreach ($chunks as $chunk) {
+                $message->to($chunk);
+
+                $response = $this->client->post(self::API_URI, [
+                    'headers' => [
+                        'Authorization' => 'key='.$this->apiKey,
+                        'Content-Type'  => 'application/json',
+                    ],
+                    'body' => $message->formatData(),
+                ]);
+            }
+        } else {
+            $response = $this->client->post(self::API_URI, [
+                'headers' => [
                     'Authorization' => 'key='.$this->apiKey,
                     'Content-Type'  => 'application/json',
                 ],
-                $message->getHeaders()
-            ),
-            'body' => $message->formatData(),
-        ]);
+                'body' => $message->formatData(),
+            ]);
+        }
 
         return \GuzzleHttp\json_decode($response->getBody(), true);
     }
