@@ -23,10 +23,10 @@ class FcmChannel
     /**
      * @var string
      */
-    private $apikey;
+    private $apiKey;
 
     /**
-     * @param Client $client
+     * @param  Client  $client
      */
     public function __construct(Client $client, $apiKey)
     {
@@ -35,8 +35,9 @@ class FcmChannel
     }
 
     /**
-     * @param mixed $notifiable
-     * @param Notification $notification
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
+     * @return mixed
      */
     public function send($notifiable, Notification $notification)
     {
@@ -44,7 +45,7 @@ class FcmChannel
         $message = $notification->toFcm($notifiable);
 
         if (is_null($message->getTo()) && is_null($message->getCondition())) {
-            if (! $to = $notifiable->routeNotificationFor('fcm', $notification)) {
+            if (!$to = $notifiable->routeNotificationFor('fcm', $notification)) {
                 return;
             }
 
@@ -55,7 +56,7 @@ class FcmChannel
             'headers' => array_merge(
                 [
                     'Authorization' => 'key='.$this->apiKey,
-                    'Content-Type'  => 'application/json',
+                    'Content-Type' => 'application/json',
                 ],
                 $message->getHeaders()
             ),

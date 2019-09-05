@@ -1,10 +1,13 @@
-# laravel-fcm-notification
+# Laravel FCM Notification
 Laravel FCM (Firebase Cloud Messaging) Notification Channel
 
-[![Latest Version](https://img.shields.io/github/release/benwilkins/laravel-fcm-notification.svg?style=flat-square)](https://github.com/benwilkins/laravel-fcm-notification/releases)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![GitHub tag](https://badgen.net/github/tag/benwilkins/laravel-fcm-notification)](https://github.com/benwilkins/laravel-fcm-notification/releases)
+[![Packagist](https://badgen.net/packagist/v/benwilkins/laravel-fcm-notification)](https://packagist.org/packages/benwilkins/laravel-fcm-notification)
+[![Downloads](https://badgen.net/packagist/dt/benwilkins/laravel-fcm-notification)](https://packagist.org/packages/benwilkins/laravel-fcm-notification)
+[![Build Status](https://travis-ci.com/benwilkins/laravel-fcm-notification.svg)](https://travis-ci.com/benwilkins/laravel-fcm-notification)
+[![License](https://badgen.net/packagist/license/benwilkins/laravel-fcm-notification)](https://packagist.org/packages/benwilkins/laravel-fcm-notification)
 
-Use this package to send push notifications via Laravel to Firebase Cloud Messaging. Laravel 5.3+ required.
+Use this package to send push notifications via Laravel to Firebase Cloud Messaging. Laravel 5.5+ required.
 
 This package works only with [Legacy HTTP Server Protocol](https://firebase.google.com/docs/cloud-messaging/http-server-ref)
 
@@ -13,7 +16,7 @@ This package works only with [Legacy HTTP Server Protocol](https://firebase.goog
 This package can be installed through Composer.
 
 ``` bash
-composer require benwilkins/laravel-fcm-notification:dev-master
+composer require benwilkins/laravel-fcm-notification
 ```
 
 If installing on < Laravel 5.5 then add the service provider:
@@ -38,7 +41,7 @@ return [
      * Add the Firebase API key
      */
     'fcm' => [
-        'key' => ''
+        'key' => env('FCM_SECRET_KEY')
      ]
 ];
 ```
@@ -164,7 +167,7 @@ public function toFcm($notifiable)
 
 ## Interpreting a Response
 
-To proccess any laravel notification channel response check [Laravel Notification Events](https://laravel.com/docs/5.5/notifications#notification-events)
+To process any laravel notification channel response check [Laravel Notification Events](https://laravel.com/docs/6.0/notifications#notification-events)
 
 This channel return a json array response: 
 ```json
@@ -173,7 +176,7 @@ This channel return a json array response:
     "success": "number",
     "failure": "number",
     "canonical_ids": "number",
-    "results": "array",
+    "results": "array"
  }
 ```
 
