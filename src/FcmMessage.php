@@ -76,6 +76,8 @@ class FcmMessage
     {
         if ($recipientIsTopic && is_string($recipient)) {
             $this->to = '/topics/'.$recipient;
+        } elseif (is_array($recipient) && count($recipient) == 1) {
+            $this->to = $recipient[0];
         } else {
             $this->to = $recipient;
         }
