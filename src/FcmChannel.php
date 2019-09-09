@@ -51,6 +51,8 @@ class FcmChannel
             $message->to($to);
         }
         
+        $response_array = [];
+        
         if (is_array($message->getTo())) {
             $chunks = array_chunk($message->getTo(), 1000);
 
@@ -64,6 +66,8 @@ class FcmChannel
                     ],
                     'body' => $message->formatData(),
                 ]);
+                
+                array_push($response_array, \GuzzleHttp\json_decode($response->getBody(), true));
             }
         } else {
             $response = $this->client->post(self::API_URI, [
@@ -73,8 +77,10 @@ class FcmChannel
                 ],
                 'body' => $message->formatData(),
             ]);
+            
+            array_push($response_array, \GuzzleHttp\json_decode($response->getBody(), true));
         }
 
-        return \GuzzleHttp\json_decode($response->getBody(), true);
+        return $response_array;
     }
 }
