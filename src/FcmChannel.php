@@ -45,15 +45,15 @@ class FcmChannel
         $message = $notification->toFcm($notifiable);
 
         if (is_null($message->getTo()) && is_null($message->getCondition())) {
-            if (!$to = $notifiable->routeNotificationFor('fcm', $notification)) {
+            if (! $to = $notifiable->routeNotificationFor('fcm', $notification)) {
                 return;
             }
 
             $message->to($to);
         }
-        
+
         $response_array = [];
-        
+
         if (is_array($message->getTo())) {
             $chunks = array_chunk($message->getTo(), 1000);
 
@@ -67,7 +67,7 @@ class FcmChannel
                     ],
                     'body' => $message->formatData(),
                 ]);
-                
+
                 array_push($response_array, \GuzzleHttp\json_decode($response->getBody(), true));
             }
         } else {
@@ -78,7 +78,7 @@ class FcmChannel
                 ],
                 'body' => $message->formatData(),
             ]);
-            
+
             array_push($response_array, \GuzzleHttp\json_decode($response->getBody(), true));
         }
 
