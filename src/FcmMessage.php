@@ -50,7 +50,7 @@ class FcmMessage
     /**
      * @var int
      */
-    private $timeToTive;
+    private $timeToLive;
 
     /**
      * @var bool
@@ -206,18 +206,18 @@ class FcmMessage
     /**
      * @return int
      */
-    public function getTimeToTive()
+    public function getTimeToLive()
     {
-        return $this->timeToTive;
+        return $this->timeToLive;
     }
 
     /**
-     * @param int $timeToTive
+     * @param int $timeToLive
      * @return $this
      */
-    public function timeToTive($timeToTive)
+    public function timeToLive($timeToLive)
     {
-        $this->timeToTive = $timeToTive;
+        $this->timeToLive = $timeToLive;
 
         return $this;
     }
@@ -271,7 +271,7 @@ class FcmMessage
 
         if (is_array($this->to)) {
             $payload['registration_ids'] = $this->to;
-        } elseif (!empty($this->to)) {
+        } elseif (! empty($this->to)) {
             $payload['to'] = $this->to;
         }
 
@@ -299,8 +299,8 @@ class FcmMessage
             $payload['mutable_content'] = $this->mutableContent;
         }
 
-        if (isset($this->timeToTive)) {
-            $payload['time_to_live'] = $this->timeToTive;
+        if (isset($this->timeToLive)) {
+            $payload['time_to_live'] = $this->timeToLive;
         }
 
         if (isset($this->dryRun)) {
