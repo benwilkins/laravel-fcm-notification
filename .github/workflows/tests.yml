@@ -1,0 +1,38 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [7.0, 7.1, 7.2, 7.3, 7.4]
+        composer-flag: [prefer-lowest, prefer-stable]
+
+    name: php v${{ matrix.php }} - ${{ matrix.composer-flag }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: php-v${{ matrix.php }}-${{ matrix.composer-flag }}-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer update --${{ matrix.composer-flag }} --no-interaction
+
+      - name: Execute tests
+        run: composer test -- --coverage-text --coverage-clover=coverage.clover
