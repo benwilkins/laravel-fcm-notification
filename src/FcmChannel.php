@@ -52,25 +52,14 @@ class FcmChannel
             $message->to($to);
         }
 
-        $response_array = [];
+        $responses = [];
+        $recipients = is_array($message->getTo()) ? $message->getTo() : [$message->getTo()];
 
-        if (is_array($message->getTo())) {
-            $chunks = array_chunk($message->getTo(), 1000);
+        $chunks = array_chunk($recipients, 1000);
 
-            foreach ($chunks as $chunk) {
-                $message->to($chunk);
+        foreach ($chunks as $chunk) {
+            $message->to($chunk);
 
-                $response = $this->client->post(self::API_URI, [
-                    'headers' => [
-                        'Authorization' => 'key='.$this->apiKey,
-                        'Content-Type'  => 'application/json',
-                    ],
-                    'body' => $message->formatData(),
-                ]);
-
-                array_push($response_array, \GuzzleHttp\json_decode($response->getBody(), true));
-            }
-        } else {
             $response = $this->client->post(self::API_URI, [
                 'headers' => [
                     'Authorization' => 'key='.$this->apiKey,
@@ -79,9 +68,9 @@ class FcmChannel
                 'body' => $message->formatData(),
             ]);
 
-            array_push($response_array, \GuzzleHttp\json_decode($response->getBody(), true));
+            array_push($responses, \GuzzleHttp\json_decode($response->getBody(), true));
         }
 
-        return $response_array;
+        return $responses;
     }
 }
