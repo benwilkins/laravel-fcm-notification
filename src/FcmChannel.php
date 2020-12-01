@@ -52,36 +52,39 @@ class FcmChannel
             $message->to($to);
         }
 
-        $response_array = [];
+        $toChunks = is_array($message->getTo()) ?
+                    array_chunk($message->getTo(), 1) :
+                    [[$message->getTo()]];
 
-        if (is_array($message->getTo())) {
-            $chunks = array_chunk($message->getTo(), 1000);
+        $response = [
+            'toChunks' => $toChunks,
+            'outputs' => []
+        ];
 
-            foreach ($chunks as $chunk) {
-                $message->to($chunk);
-
-                $response = $this->client->post(self::API_URI, [
-                    'headers' => [
-                        'Authorization' => 'key='.$this->apiKey,
-                        'Content-Type'  => 'application/json',
-                    ],
-                    'body' => $message->formatData(),
-                ]);
-
-                array_push($response_array, \GuzzleHttp\json_decode($response->getBody(), true));
-            }
-        } else {
-            $response = $this->client->post(self::API_URI, [
-                'headers' => [
-                    'Authorization' => 'key='.$this->apiKey,
-                    'Content-Type' => 'application/json',
-                ],
-                'body' => $message->formatData(),
-            ]);
-
-            array_push($response_array, \GuzzleHttp\json_decode($response->getBody(), true));
+        foreach ($toChunks as $toChunks) {
+            $message->to($toChunks);
+            $response['outputs'][] = $this->makeCall($message->formatData());
         }
 
-        return $response_array;
+        return $response;
+    }
+
+    /**
+     * Prepare client and call
+     *
+     * @param string $body
+     * @return string
+     */
+    public function makeCall($body)
+    {
+        $call = $this->client->post(self::API_URI, [
+            'headers' => [
+                'Authorization' => 'key='.$this->apiKey,
+                'Content-Type'  => 'application/json',
+            ],
+            'body' => $body,
+        ]);
+
+        return \GuzzleHttp\json_decode($call->getBody(), true);
     }
 }

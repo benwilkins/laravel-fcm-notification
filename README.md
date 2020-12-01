@@ -165,6 +165,39 @@ public function toFcm($notifiable)
 }
 ```
 
+Also you may want to get failed tokens, if you need capture failed tokens(for delete they on database proccess etc.) you can:
+
+```php
+<?php
+
+namespace App\Listeners;
+
+use Illuminate\Notifications\Events\NotificationSent;
+
+class LogNotification
+{
+    /**
+     * Handle the event.
+     *
+     * @param  NotificationSent  $event
+     * @return void
+     */
+    public function handle(NotificationSent $event)
+    {
+        $toChunks = $event->response['toChunks'];
+
+        foreach ($event->response['outputs'] as $outputKey => $output) {
+            foreach ($output['results'] as $resultKey => $result) {
+                if (array_key_exists('error', $result)) {
+                    // Failed tokens will be printed
+                    echo $toChunks[$outputKey][$resultKey];
+                }
+            }
+        }
+    }
+}
+```
+
 ## Interpreting a Response
 
 To process any laravel notification channel response check [Laravel Notification Events](https://laravel.com/docs/6.0/notifications#notification-events)
