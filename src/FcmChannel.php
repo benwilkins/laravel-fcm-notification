@@ -53,7 +53,7 @@ class FcmChannel
         }
 
         $toChunks = is_array($message->getTo()) ?
-                    array_chunk($message->getTo(), 1) :
+                    array_chunk($message->getTo(), 1000) :
                     [[$message->getTo()]];
 
         $response = [
