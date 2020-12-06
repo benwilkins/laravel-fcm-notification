@@ -184,13 +184,11 @@ class LogNotification
      */
     public function handle(NotificationSent $event)
     {
-        $toChunks = $event->response['toChunks'];
-
         foreach ($event->response['outputs'] as $outputKey => $output) {
             foreach ($output['results'] as $resultKey => $result) {
                 if (array_key_exists('error', $result)) {
                     // Failed tokens will be printed
-                    echo $toChunks[$outputKey][$resultKey];
+                    echo $event->response['toChunks'][$outputKey][$resultKey];
                 }
             }
         }
