@@ -70,7 +70,7 @@ class FcmChannel
     }
 
     /**
-     * Prepare client and call
+     * Prepare client and make call
      *
      * @param string $body
      * @return string
