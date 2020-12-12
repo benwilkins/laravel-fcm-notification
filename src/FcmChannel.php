@@ -61,8 +61,8 @@ class FcmChannel
             'outputs' => []
         ];
 
-        foreach ($toChunks as $toChunks) {
-            $message->to($toChunks);
+        foreach ($toChunks as $toChunk) {
+            $message->to($toChunk);
             $response['outputs'][] = $this->makeCall($message->formatData());
         }
 
