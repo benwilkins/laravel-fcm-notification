@@ -52,16 +52,14 @@ class FcmChannel
             $message->to($to);
         }
 
-        $toChunks = is_array($message->getTo()) ?
-                    array_chunk($message->getTo(), 1000) :
-                    [[$message->getTo()]];
-
         $response = [
-            'toChunks' => $toChunks,
+            'toChunks' => is_array($message->getTo()) ?
+                    array_chunk($message->getTo(), 1000) :
+                    [[$message->getTo()]],
             'outputs' => []
         ];
 
-        foreach ($toChunks as $toChunk) {
+        foreach ($response['toChunks'] as $toChunk) {
             $message->to($toChunk);
             $response['outputs'][] = $this->makeCall($message->formatData());
         }
