@@ -46,6 +46,19 @@ return [
 ];
 ```
 
+# FCM using Model
+
+```php
+use Benwilkins\FCM\Models\FCM;
+```
+Change in User Model
+```php
+    public function fcm()
+    {
+        return $this->hasMany(FCM::class);
+    }
+```
+
 ## Example Usage
 
 Use Artisan to create a notification:
@@ -101,6 +114,45 @@ public function routeNotificationForFcm($notification)
     return $this->device_token;
 }
 ```
+# OR using Model
+
+When sending to specific device using Modal, make sure your notifiable entity has `routeNotificationForFcm` method defined: 
+```php
+public function routeNotificationForFcm($notification)
+    {
+        //For Single Token Only
+        /*
+        if($this->fcm){
+            return $this->fcm[0]->token;
+        }
+        */
+        if($this->fcm){
+            $array = $this->fcm->pluck('token')->toArray();
+        return implode(',',$array);
+        }
+        return null;
+    }
+```
+
+User Modal Add Static Method For Update Token
+
+```php
+public static function updateFCM($user_id,$fcm_token){
+        $fcmQuery = FCM::query();
+        $fcm = $fcmQuery->where('user_id',$user_id)->first();
+        if($fcm){
+            $fcm->update([
+                "token" =>$fcm_token
+            ]);
+            return true;
+        }
+        $fcmQuery->create([
+            "user_id" =>$user_id,
+            "token" =>$fcm_token
+        ]);
+        return true;
+    }
+``` 
 
 When sending to a topic, you may define so within the `toFcm` method in the notification:
 
