@@ -1,55 +1,55 @@
 {
-  "name": "benwilkins/laravel-fcm-notification",
-  "description": "Laravel FCM (Firebase Cloud Messaging) Notification Channel",
-  "license": "MIT",
-  "keywords": [
-    "laravel",
-    "fcm",
-    "firebase",
-    "notifications"
-  ],
-  "authors": [
-    {
-      "name": "Ben Wilkins",
-      "email": "bentwilkins@gmail.com"
-    }
-  ],
-  "require": {
-    "php": ">=5.6.4",
-    "guzzlehttp/guzzle": "^6.2|^7.0",
-    "illuminate/notifications": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/queue": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/support": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/config": "~5.3|^6.0|^7.0|^8.0|^9.0"
-  },
-  "require-dev": {
-    "mockery/mockery": "~1.0",
-    "phpunit/phpunit": "~6.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Benwilkins\\FCM\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Benwilkins\\FCM\\Tests\\": "tests"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Benwilkins\\FCM\\FcmNotificationServiceProvider"
-      ]
-    }
-  },
-  "scripts": {
-    "test": "phpunit"
-  },
-  "config": {
-    "sort-packages": true,
-    "preferred-install": "dist"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "benwilkins/laravel-fcm-notification",
+    "description": "Laravel FCM (Firebase Cloud Messaging) Notification Channel",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "fcm",
+        "firebase",
+        "notifications"
+    ],
+    "authors": [
+        {
+            "name": "Ben Wilkins",
+            "email": "bentwilkins@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "guzzlehttp/guzzle": "^6.2|^7.0",
+        "illuminate/notifications": "~5.3|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "illuminate/queue": "~5.3|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "illuminate/support": "~5.3|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "illuminate/config": "~5.3|^6.0|^7.0|^8.0|^9.0|^10.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~6.0|^9.5.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Benwilkins\\FCM\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Benwilkins\\FCM\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Benwilkins\\FCM\\FcmNotificationServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
