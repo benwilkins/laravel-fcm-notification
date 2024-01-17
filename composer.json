@@ -15,16 +15,16 @@
     }
   ],
   "require": {
-    "php": ">=5.6.4",
-    "guzzlehttp/guzzle": "^6.2|^7.0",
-    "illuminate/notifications": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/queue": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/support": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/config": "~5.3|^6.0|^7.0|^8.0|^9.0"
+    "php": ">=8.0",
+    "guzzlehttp/guzzle": "*",
+    "illuminate/notifications": "*",
+    "illuminate/queue": "*",
+    "illuminate/support": "*",
+    "illuminate/config": "*"
   },
   "require-dev": {
-    "mockery/mockery": "~1.0",
-    "phpunit/phpunit": "~6.0"
+    "mockery/mockery": "^1.6",
+    "phpunit/phpunit": "^10.5"
   },
   "autoload": {
     "psr-4": {
