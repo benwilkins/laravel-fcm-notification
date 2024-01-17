@@ -16,15 +16,15 @@
   ],
   "require": {
     "php": ">=8.0",
-    "guzzlehttp/guzzle": "^6.2|^7.0",
-    "illuminate/notifications": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/queue": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/support": "~5.3|^6.0|^7.0|^8.0|^9.0",
-    "illuminate/config": "~5.3|^6.0|^7.0|^8.0|^9.0"
+    "guzzlehttp/guzzle": "*",
+    "illuminate/notifications": "*",
+    "illuminate/queue": "*",
+    "illuminate/support": "*",
+    "illuminate/config": "*"
   },
   "require-dev": {
-    "mockery/mockery": "^1.4.4",
-    "phpunit/phpunit": "^10.1"
+    "mockery/mockery": "^1.6",
+    "phpunit/phpunit": "^10.5"
   },
   "autoload": {
     "psr-4": {
